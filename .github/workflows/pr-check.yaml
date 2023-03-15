@@ -19,7 +19,7 @@ jobs:
             dotnet-version: 6.0.x
 
         - name: Restore depencies
-          run: donten restore
+          run: dotnet restore
           working-directory: WebApplicationWithActions
 
         - name: Build
