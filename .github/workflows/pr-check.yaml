@@ -1,0 +1,31 @@
+name: .net PR check
+
+on: 
+    push:
+        branches: [ "master" ]
+    pull_request:
+        branches: [ "master" ]
+
+jobs: 
+    build-and-test: 
+        name: Build and tests
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v3
+
+        - name: Setup .Net
+          uses: actions/setup-dotnet@v3
+          with:
+            dotnet-version: 6.0.x
+
+        - name: Restore depencies
+          run: donten restore
+          working-directory: WebApplicationWithActions
+
+        - name: Build
+          run: dotnet build --no-restore
+
+        - name: Tests
+          run: dotnet test --no-build
+          working-directory: WebAplicationWithActions.Tests.Unit
+    
